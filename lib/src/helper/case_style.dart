@@ -9,8 +9,11 @@ class CaseStyle {
     this.iconSize = 24,
     this.initSize,
     this.boxAspectRatio,
+    this.immutable = false,
     this.initOffset = Offset.zero,
   });
+
+  final bool immutable;
 
   /// 边框(包括操作手柄)颜色
   final Color borderColor;

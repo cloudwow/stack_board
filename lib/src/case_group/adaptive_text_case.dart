@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_drawing_board/flutter_drawing_board.dart';
+import 'package:stack_board/src/helper/safe_state.dart';
 import 'package:stack_board/src/helper/operat_state.dart';
 import 'package:stack_board/src/item_group/adaptive_text.dart';
 
@@ -34,8 +34,7 @@ class AdaptiveTextCase extends StatefulWidget {
   final OperatState? operatState;
 }
 
-class _AdaptiveTextCaseState extends State<AdaptiveTextCase>
-    with SafeState<AdaptiveTextCase> {
+class _AdaptiveTextCaseState extends State<AdaptiveTextCase> with SafeState<AdaptiveTextCase> {
   /// 是否正在编辑
   bool _isEditing = false;
 
@@ -51,9 +50,7 @@ class _AdaptiveTextCaseState extends State<AdaptiveTextCase>
   /// 计算文本大小
   Size _textSize(String text, TextStyle style) {
     final TextPainter textPainter = TextPainter(
-        text: TextSpan(text: text, style: style),
-        maxLines: 1,
-        textDirection: TextDirection.ltr)
+        text: TextSpan(text: text, style: style), maxLines: 1, textDirection: TextDirection.ltr)
       ..layout(minWidth: 0, maxWidth: double.infinity);
     return textPainter.size;
   }

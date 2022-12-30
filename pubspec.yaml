@@ -12,7 +12,6 @@ dependencies:
     sdk: flutter
 
   meta: ^1.7.0
-  flutter_drawing_board: ^0.2.7
 
 dev_dependencies:
   flutter_test:

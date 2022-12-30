@@ -1,16 +1,14 @@
 library stack_board;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_drawing_board/flutter_drawing_board.dart';
 import 'package:stack_board/src/helper/operat_state.dart';
+import 'package:stack_board/src/helper/safe_state.dart';
 
 import 'case_group/adaptive_text_case.dart';
-import 'case_group/drawing_board_case.dart';
 import 'case_group/item_case.dart';
 import 'helper/case_style.dart';
 import 'item_group/adaptive_text.dart';
 import 'item_group/stack_board_item.dart';
-import 'item_group/stack_drawing.dart';
 
 /// 层叠板
 class StackBoard extends StatefulWidget {
@@ -176,22 +174,14 @@ class _StackBoardState extends State<StackBoard> with SafeState<StackBoard> {
         onTap: () => _moveItemToTop(item.id),
         operatState: _operatState,
       );
-    } else if (item is StackDrawing) {
-      child = DrawingBoardCase(
-        key: _getKey(item.id),
-        stackDrawing: item,
-        onDel: () => _onDel(item),
-        onTap: () => _moveItemToTop(item.id),
-        operatState: _operatState,
-      );
     } else {
       child = ItemCase(
         key: _getKey(item.id),
         child: item.child,
         onDel: () => _onDel(item),
-        onTap: () => _moveItemToTop(item.id),
+        onTap: item.caseStyle?.immutable ?? false ? null : () => _moveItemToTop(item.id),
         caseStyle: item.caseStyle,
-        operatState: _operatState,
+        operatState: item.caseStyle?.immutable ?? false ? OperatState.complate : _operatState,
       );
 
       if (widget.customBuilder != null) {

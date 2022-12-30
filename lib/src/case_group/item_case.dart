@@ -1,9 +1,12 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_drawing_board/flutter_drawing_board.dart';
 import 'package:stack_board/src/helper/case_style.dart';
+import 'package:stack_board/src/helper/ex_value_builder.dart';
+import 'package:stack_board/src/helper/get_size.dart';
 import 'package:stack_board/src/helper/operat_state.dart';
+import 'package:stack_board/src/helper/safe_state.dart';
+import 'package:stack_board/src/helper/safe_value_notifier.dart';
 
 /// 配置项
 class _Config {
@@ -162,6 +165,7 @@ class _ItemCaseState extends State<ItemCase> with SafeState<ItemCase> {
 
   /// 移动操作
   void _moveHandle(DragUpdateDetails dud) {
+    if (_caseStyle.immutable) return;
     if (_operatState != OperatState.moving) {
       if (_operatState == OperatState.scaling || _operatState == OperatState.roating) {
         _operatState = OperatState.moving;
